@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/max_pk', 'MainController@getList');
 Route::get('/address/streets', 'AddressController@getListStreets');
 Route::get('/address/streets/{name}', 'AddressController@getStreetByName');
 Route::get('/address/city/{name}', 'AddressController@getCityByName');
