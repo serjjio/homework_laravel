@@ -82,6 +82,6 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // {"email": 'test@test.com', "pass": 123}
     }
 }

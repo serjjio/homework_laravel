@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Building;
 use App\City;
+use App\Services\Auth\AuthJwtToken;
+use App\Services\Auth\AuthTokenInterface;
 use App\Services\CheckMaxIdToModels;
 use App\Services\GetFullNameStreet;
 use App\Street;
@@ -16,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
         StreetProviderInterface::class => Street::class,
         City::class => City::class,
         Building::class => Building::class,
+        AuthTokenInterface::class => AuthJwtToken::class,
     ];
 
     /**
@@ -34,7 +37,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CheckMaxIdToModels::class, function ($app) {
             return new CheckMaxIdToModels($app->tagged('models'));
         });
-
     }
 
     /**

@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+Route::post('auth', 'MainController@getToken');
 Route::resource('cities', 'Rest\CityController');
 Route::resource('cities.streets', 'Rest\StreetController');
 Route::resource('cities.streets.buildings', 'Rest\BuildingController');
