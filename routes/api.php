@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AuthJwt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::post('auth', 'MainController@getToken');
-Route::resource('cities', 'Rest\CityController');
-Route::resource('cities.streets', 'Rest\StreetController');
-Route::resource('cities.streets.buildings', 'Rest\BuildingController');
+Route::middleware([AuthJwt::class])->group(function () {
+    Route::post('auth', 'MainController@getToken')->withoutMiddleware(AuthJwt::class);
+    Route::resource('cities', 'Rest\CityController')->middleware('role:admin');
+    Route::resource('cities.streets', 'Rest\StreetController');
+    Route::resource('cities.streets.buildings', 'Rest\BuildingController');
+});
+
+//Bearer
