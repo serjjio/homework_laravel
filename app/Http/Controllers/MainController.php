@@ -41,11 +41,12 @@ class MainController extends Controller
 
     public function getToken(Request $request)
     {
-
-        $user = User::query()->where([
+        //{"email:'test@test.com'; "password":'123'}
+        $data = json_decode($request->getContent());
+        /*$user = User::query()->where([
             'email' => 'test@test.com',
             'password' => 123,
-        ])->first();
+        ])->first();*/
 
         if (!$user instanceof User) {
             throw new AuthenticationException();
