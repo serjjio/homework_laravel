@@ -41,21 +41,19 @@ class MainController extends Controller
 
     public function getToken(Request $request)
     {
-        //{"email:'test@test.com'; "password":'123'}
-        $data = json_decode($request->getContent());
-        /*$user = User::query()->where([
-            'email' => 'test@test.com',
-            'password' => 123,
-        ])->first();*/
+        $user = User::query()->where([
+            'email' => $request->json('email'),
+            'password' => hash('sha256', $request->json('password')),
+        ])->first();
 
         if (!$user instanceof User) {
             throw new AuthenticationException();
         }
 
         $dateExt = new \DateTime();
-        $dateExt->modify('+1h');
+        $dateExt->modify('+1 hour');
 
-        $token = new Token($user, $dateExt, 'editor');
+        $token = Token::getInstance($user, $dateExt, 'editor');
 
         return ['token' => $this->authJwtToken->generate($token)];
     }

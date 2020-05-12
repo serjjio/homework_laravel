@@ -16,16 +16,22 @@ class Token
 
     /**
      * Token constructor.
-     * @param User $user
-     * @param \DateTime $exp
-     * @param string $role
+     * @param $id
+     * @param $role
+     * @param $iat
+     * @param $exp
      */
-    public function __construct(User $user, \DateTime $exp, string $role)
+    public function __construct($id, $role, $iat, $exp)
     {
-        $this->iat = now()->timestamp;
-        $this->exp = $exp->getTimestamp();
+        $this->iat = $iat;
+        $this->exp = $exp;
         $this->role = $role;
-        $this->user = $user->getAuthIdentifier();
+        $this->user = $id;
+    }
+
+    public static function getInstance(User $user, \DateTime $exp, string $role): self
+    {
+        return new self($user->getAuthIdentifier(), $role, now()->timestamp, $exp->getTimestamp());
     }
 
     public function getPayload(): array
@@ -36,5 +42,10 @@ class Token
             'role' => $this->role,
             'user' => $this->user,
         ];
+    }
+
+    public function getRole(): string
+    {
+        return $this->role;
     }
 }

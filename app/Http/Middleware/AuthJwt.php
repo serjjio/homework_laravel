@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Services\Auth\AuthTokenInterface;
 use Closure;
 use Illuminate\Auth\AuthenticationException;
+use UnexpectedValueException;
 
 class AuthJwt
 {
@@ -32,8 +33,13 @@ class AuthJwt
     public function handle($request, Closure $next)
     {
         $token = $this->authToken->getToken($request);
-        if (!$this->authToken->check($token)) {
-            throw new AuthenticationException();
+
+        try {
+            if (empty($token) || !$this->authToken->check($token)) {
+                throw new AuthenticationException();
+            }
+        } catch (UnexpectedValueException $e) {
+            throw new AuthenticationException($e->getMessage());
         }
 
         return $next($request);
