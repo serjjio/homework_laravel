@@ -10,6 +10,11 @@ use UnexpectedValueException;
 class AuthJwt
 {
     /**
+     * @var int
+     */
+    private static $countCallHandle;
+
+    /**
      * @var AuthTokenInterface
      */
     private $authToken;
@@ -32,6 +37,7 @@ class AuthJwt
      */
     public function handle($request, Closure $next)
     {
+        self::$countCallHandle++;
         $token = $this->authToken->getToken($request);
 
         try {
@@ -43,5 +49,10 @@ class AuthJwt
         }
 
         return $next($request);
+    }
+
+    public function getCountCallHandle(): int
+    {
+        return self::$countCallHandle;
     }
 }
