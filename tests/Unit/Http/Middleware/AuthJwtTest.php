@@ -120,11 +120,11 @@ class AuthJwtTest extends TestCase
 
     /**
      * @test
+     *
+     * @dataProvider handleProvider
      */
-    public function handle()
+    public function handle($token, $countCall)
     {
-        $token = 'token';
-
         $this->authToken
             ->expects($this->once())
             ->method('getToken')
@@ -145,6 +145,14 @@ class AuthJwtTest extends TestCase
 
         $this->authJwt->handle($this->request, $next);
 
-        $this->assertEquals(4, $this->authJwt->getCountCallHandle());
+        $this->assertEquals($countCall, $this->authJwt->getCountCallHandle());
+    }
+
+    public function handleProvider()
+    {
+        return [
+          'TOKEN SIMPLE' => ['token', 4],
+          'TOKEN LONG' => ['tokentokentokentokentoken', 5],
+        ];
     }
 }

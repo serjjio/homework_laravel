@@ -49,6 +49,7 @@ class AddressController extends Controller
     public function getCityByName($name)
     {
         $city = $this->city->getQB()->where(['name' => $name])->first();
+
         echo  $city->name . ' - <br>';
         $streets = $city->streets;
 
