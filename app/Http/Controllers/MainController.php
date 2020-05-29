@@ -39,8 +39,10 @@ class MainController extends Controller
         }
     }
 
+
     public function getToken(Request $request)
     {
+
         $user = User::query()->where([
             'email' => $request->json('email'),
             'password' => hash('sha256', $request->json('password')),
@@ -51,9 +53,9 @@ class MainController extends Controller
         }
 
         $dateExt = new \DateTime();
-        $dateExt->modify('+1 hour');
+        $dateExt->modify('+10 hour');
 
-        $token = Token::getInstance($user, $dateExt, 'editor');
+        $token = Token::getInstance($user, $dateExt, $user->role);
 
         return ['token' => $this->authJwtToken->generate($token)];
     }

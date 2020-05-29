@@ -8,6 +8,7 @@ use App\Services\Auth\AuthJwtToken;
 use App\Services\Auth\AuthTokenInterface;
 use App\Services\CheckMaxIdToModels;
 use App\Services\GetFullNameStreet;
+use App\Services\Role\CheckUserRole;
 use App\Street;
 use App\StreetProviderInterface;
 use Illuminate\Support\ServiceProvider;
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
         City::class => City::class,
         Building::class => Building::class,
         AuthTokenInterface::class => AuthJwtToken::class,
+        CheckUserRole::class => CheckUserRole::class,
     ];
 
     /**
