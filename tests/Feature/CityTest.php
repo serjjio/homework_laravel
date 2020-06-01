@@ -42,8 +42,6 @@ class CityTest extends TestCase
      */
     public function getCreateCity()
     {
-        $name = 'Kyiv';
-
         factory(City::class, 10)->create();
 
         $this->assertCount(10, City::all());

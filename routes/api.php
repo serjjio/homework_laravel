@@ -21,8 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware([AuthJwt::class])->group(function () {
     Route::post('auth', 'MainController@getToken')->withoutMiddleware(AuthJwt::class);
-    Route::resource('cities', 'Rest\CityController')->middleware('role:admin');
-    Route::resource('cities.streets', 'Rest\StreetController');
+    Route::resource('cities', 'Rest\CityController')->middleware('role:admin'); // admin super_admin
+    Route::resource('cities.streets', 'Rest\StreetController')->middleware('role:editor'); //editor admin super_admin;
     Route::resource('cities.streets.buildings', 'Rest\BuildingController');
 });
 

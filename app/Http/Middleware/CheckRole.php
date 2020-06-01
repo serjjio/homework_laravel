@@ -8,6 +8,10 @@ use Illuminate\Auth\AuthenticationException;
 
 class CheckRole
 {
+    const S_A = 'sa';
+    const A = 'a';
+    const E = 'e';
+
     /**
      * @var AuthTokenInterface
      */
@@ -32,6 +36,16 @@ class CheckRole
     public function handle($request, Closure $next, string $role)
     {
         $token = $this->authToken->getTokenObject($request);
+
+        //$token->getRole() = 'admin';
+        //$role = 'editor'
+
+
+        $admin = [
+            'editor',
+            'manager',
+        ];
+
 
         if ($token->getRole() != $role) {
             throw new AuthenticationException('User role do not has permission');
