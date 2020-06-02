@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use App\Services\Auth\AuthTokenInterface;
 use App\Services\Role\CheckUserRole;
 use Closure;
-use http\Exception\UnexpectedValueException;
 use Illuminate\Auth\AuthenticationException;
 
 class CheckRole
