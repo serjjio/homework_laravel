@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Street;
 use App\StreetProviderInterface;
 
 class GetFullNameStreet

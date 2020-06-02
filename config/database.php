@@ -55,6 +55,12 @@ return [
             ]) : [],
         ],
 
+        'sqlite' => [
+            'driver' => 'sqlite',
+            'database' => database_path('testing.sqlite'),
+            // 'database' => database_path('database.sqlite'), // this one was setup prior and did not fix issue
+            'prefix' => '',
+        ],
     ],
 
     /*

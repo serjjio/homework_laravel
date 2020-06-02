@@ -10,6 +10,10 @@ use Illuminate\Auth\AuthenticationException;
 
 class CheckRole
 {
+    const S_A = 'sa';
+    const A = 'a';
+    const E = 'e';
+
     /**
      * @var AuthTokenInterface
      */
@@ -39,8 +43,8 @@ class CheckRole
     {
         $token = $this->authToken->getTokenObject($request);
 
-        if (!$this->checkUserRole->check($token, $role)) {
 
+        if (!$this->checkUserRole->check($token, $role)) {
             throw new AuthenticationException('User role do not has permission');
         }
 
