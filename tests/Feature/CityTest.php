@@ -30,7 +30,10 @@ class CityTest extends TestCase
 
         $this->assertEquals($name, $city->name);
 
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create([
+            'enabled' => true,
+            'role' => 'admin'
+        ]);
         $response = $this->get('/api/cities/'. $city->id,['Authorization' => 'Bearer ' . $this->getToken($user)]);
 
         $response->assertStatus(200);

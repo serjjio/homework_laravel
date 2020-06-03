@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for /var/www/html/laravel_win_20/app/Http/Middleware</title>
+  <title>Dashboard for /var/www/html/laravel_win_20/app/Services/Role</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../../_css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="../../_css/nv.d3.min.css" rel="stylesheet" type="text/css">
@@ -17,8 +17,8 @@
       <nav aria-label="breadcrumb">
        <ol class="breadcrumb">
          <li class="breadcrumb-item"><a href="../../index.html">/var/www/html/laravel_win_20/app</a></li>
-         <li class="breadcrumb-item"><a href="../index.html">Http</a></li>
-         <li class="breadcrumb-item"><a href="index.html">Middleware</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">Services</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Role</a></li>
          <li class="breadcrumb-item active">(Dashboard)</li>
 
        </ol>
@@ -59,9 +59,8 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="Authenticate.php.html#7">App\Http\Middleware\Authenticate</a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="RedirectIfAuthenticated.php.html#9">App\Http\Middleware\RedirectIfAuthenticated</a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="CheckRole.php.html#10">App\Http\Middleware\CheckRole</a></td><td class="text-right">85%</td></tr>
+       <tr><td><a href="UserRole.php.html#7">App\Services\Role\UserRole</a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="CheckUserRole.php.html#9">App\Services\Role\CheckUserRole</a></td><td class="text-right">77%</td></tr>
 
        </tbody>
       </table>
@@ -78,9 +77,8 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="Authenticate.php.html#7">App\Http\Middleware\Authenticate</a></td><td class="text-right">6</td></tr>
-       <tr><td><a href="RedirectIfAuthenticated.php.html#9">App\Http\Middleware\RedirectIfAuthenticated</a></td><td class="text-right">6</td></tr>
-       <tr><td><a href="CheckRole.php.html#10">App\Http\Middleware\CheckRole</a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="CheckUserRole.php.html#9">App\Services\Role\CheckUserRole</a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="UserRole.php.html#7">App\Services\Role\UserRole</a></td><td class="text-right">2</td></tr>
 
        </tbody>
       </table>
@@ -118,9 +116,8 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="Authenticate.php.html#15"><abbr title="App\Http\Middleware\Authenticate::redirectTo">redirectTo</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="RedirectIfAuthenticated.php.html#19"><abbr title="App\Http\Middleware\RedirectIfAuthenticated::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="CheckRole.php.html#41"><abbr title="App\Http\Middleware\CheckRole::handle">handle</abbr></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="UserRole.php.html#25"><abbr title="App\Services\Role\UserRole::getAllowedRoles">getAllowedRoles</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="CheckUserRole.php.html#22"><abbr title="App\Services\Role\CheckUserRole::check">check</abbr></a></td><td class="text-right">71%</td></tr>
 
        </tbody>
       </table>
@@ -137,9 +134,8 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="Authenticate.php.html#15"><abbr title="App\Http\Middleware\Authenticate::redirectTo">redirectTo</abbr></a></td><td class="text-right">6</td></tr>
-       <tr><td><a href="RedirectIfAuthenticated.php.html#19"><abbr title="App\Http\Middleware\RedirectIfAuthenticated::handle">handle</abbr></a></td><td class="text-right">6</td></tr>
-       <tr><td><a href="CheckRole.php.html#41"><abbr title="App\Http\Middleware\CheckRole::handle">handle</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="CheckUserRole.php.html#22"><abbr title="App\Services\Role\CheckUserRole::check">check</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="UserRole.php.html#25"><abbr title="App\Services\Role\UserRole::getAllowedRoles">getAllowedRoles</abbr></a></td><td class="text-right">2</td></tr>
 
        </tbody>
       </table>
@@ -168,7 +164,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#classCoverageDistribution svg')
-      .datum(getCoverageDistributionData([2,0,0,0,0,0,0,0,0,1,0,6], "Class Coverage"))
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,1,1,0,0,0], "Class Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -186,7 +182,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([2,0,0,0,0,0,0,0,1,0,0,4], "Method Coverage"))
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,1,1,0,0,1], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -236,7 +232,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[100,6,"<a href=\"AuthJwt.php.html#10\">App\\Http\\Middleware\\AuthJwt<\/a>"],[0,2,"<a href=\"Authenticate.php.html#7\">App\\Http\\Middleware\\Authenticate<\/a>"],[100,0,"<a href=\"CheckForMaintenanceMode.php.html#7\">App\\Http\\Middleware\\CheckForMaintenanceMode<\/a>"],[85.714285714285708,3,"<a href=\"CheckRole.php.html#10\">App\\Http\\Middleware\\CheckRole<\/a>"],[100,0,"<a href=\"EncryptCookies.php.html#7\">App\\Http\\Middleware\\EncryptCookies<\/a>"],[0,2,"<a href=\"RedirectIfAuthenticated.php.html#9\">App\\Http\\Middleware\\RedirectIfAuthenticated<\/a>"],[100,0,"<a href=\"TrimStrings.php.html#7\">App\\Http\\Middleware\\TrimStrings<\/a>"],[100,0,"<a href=\"TrustProxies.php.html#8\">App\\Http\\Middleware\\TrustProxies<\/a>"],[100,0,"<a href=\"VerifyCsrfToken.php.html#7\">App\\Http\\Middleware\\VerifyCsrfToken<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[77.777777777777786,5,"<a href=\"CheckUserRole.php.html#9\">App\\Services\\Role\\CheckUserRole<\/a>"],[66.666666666666657,2,"<a href=\"UserRole.php.html#7\">App\\Services\\Role\\UserRole<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -260,7 +256,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"AuthJwt.php.html#26\">App\\Http\\Middleware\\AuthJwt::__construct<\/a>"],[100,4,"<a href=\"AuthJwt.php.html#38\">App\\Http\\Middleware\\AuthJwt::handle<\/a>"],[100,1,"<a href=\"AuthJwt.php.html#54\">App\\Http\\Middleware\\AuthJwt::getCountCallHandle<\/a>"],[0,2,"<a href=\"Authenticate.php.html#15\">App\\Http\\Middleware\\Authenticate::redirectTo<\/a>"],[100,1,"<a href=\"CheckRole.php.html#27\">App\\Http\\Middleware\\CheckRole::__construct<\/a>"],[75,2,"<a href=\"CheckRole.php.html#41\">App\\Http\\Middleware\\CheckRole::handle<\/a>"],[0,2,"<a href=\"RedirectIfAuthenticated.php.html#19\">App\\Http\\Middleware\\RedirectIfAuthenticated::handle<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[100,1,"<a href=\"CheckUserRole.php.html#17\">App\\Services\\Role\\CheckUserRole::__construct<\/a>"],[71.428571428571431,4,"<a href=\"CheckUserRole.php.html#22\">App\\Services\\Role\\CheckUserRole::check<\/a>"],[66.666666666666657,2,"<a href=\"UserRole.php.html#25\">App\\Services\\Role\\UserRole::getAllowedRoles<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);

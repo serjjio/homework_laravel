@@ -55,12 +55,12 @@ return [
             ]) : [],
         ],
 
-        'sqlite' => [
+
+        'sqlite_testing' => [
             'driver' => 'sqlite',
-            'database' => database_path('testing.sqlite'),
-            // 'database' => database_path('database.sqlite'), // this one was setup prior and did not fix issue
+            'database' => ':memory:',
             'prefix' => '',
-        ],
+        ]
     ],
 
     /*
